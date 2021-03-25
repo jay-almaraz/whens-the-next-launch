@@ -121,10 +121,10 @@ const theme = {
         fontSize: 0,
       },
       a: {
-        color: "primary",
+        color: "inherit",
         textDecoration: "none",
         ":hover": {
-          color: "secondary",
+          color: "#0004C4",
           textDecoration: "underline",
         },
       },

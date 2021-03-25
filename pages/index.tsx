@@ -1,3 +1,4 @@
+import Layout from "@components/Layout";
 import SpaceXLogo from "@components/SpaceXLogo";
 import { getNextLaunch, Launch } from "@lib/launches";
 import { Box, Label, Select } from "@theme-ui/components";
@@ -96,70 +97,6 @@ const TimezoneSelect = () => {
   );
 };
 
-const MenuZone = () => (
-  <Box
-    sx={{
-      display: "flex",
-      flex: "1 1 auto",
-      alignItems: "flex-start",
-      alignContent: "flex-start",
-      justifyContent: "space-between",
-      marginLeft: [-4, -6],
-      paddingRight: [0, 5],
-      marginBottom: [3, 5],
-    }}
-  >
-    <Box
-      sx={{
-        fontSize: 12,
-        backgroundColor: "#fff",
-        color: "#000",
-        paddingTop: 1,
-        paddingBottom: 1,
-        paddingRight: 4,
-      }}
-    >
-      {`whensthenextlaunch.com`}
-    </Box>
-
-    {/* Desktop nav links */}
-    <Box
-      sx={{
-        display: ["none", "block"],
-        textAlign: "right",
-        marginTop: 3,
-        fontSize: 12,
-      }}
-    >
-      <Box>{"more_launches <"}</Box>
-      <Box>{"about/legal <"}</Box>
-      <Box>{"share <"}</Box>
-    </Box>
-
-    {/* Mobile menu */}
-    <Box
-      sx={{
-        display: ["block", "none"],
-        paddingTop: 3,
-        paddingBottom: 3,
-      }}
-    >
-      <Box
-        sx={{
-          backgroundColor: "#0004C4",
-          padding: 2,
-          paddingLeft: 4,
-          textAlign: "right",
-          fontSize: 12,
-          fontWeight: "bold",
-        }}
-      >
-        {"MENU <"}
-      </Box>
-    </Box>
-  </Box>
-);
-
 export default function Home(props: HomeProps) {
   const { data } = props;
 
@@ -167,54 +104,28 @@ export default function Home(props: HomeProps) {
   const localTime = "10:00 am";
 
   return (
-    <>
+    <Layout>
       <HtmlHead />
 
       <Box
+        as="p"
         sx={{
           display: "flex",
-          flex: "1 1 auto",
-          justifyContent: "center",
-          maxWidth: 960,
+          flexDirection: "column",
         }}
       >
-        <Box
-          as="article"
-          sx={{
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "wrap",
-            width: ["100vw", 500],
-            paddingLeft: [4, 5],
-            paddingBottom: 4,
-            backgroundColor: "#000",
-            boxShadow: "96px 16px 0 0 #000, 112px 32px 0 0 #fff",
-          }}
-        >
-          <MenuZone />
-
-          <Box
-            as="p"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Box sx={{ width: ["100%", 500], overflow: "hidden" }}>
-              <SpaceXLogo />
-            </Box>
-            <LabelSpan>has scheduled the</LabelSpan>
-            <EmphSpan>{data.name}</EmphSpan>
-            <LabelSpan>mission for</LabelSpan>
-            <EmphSpan>{localDate}</EmphSpan>
-            <LabelSpan>at</LabelSpan>
-            <EmphSpan>{localTime}</EmphSpan>
-            <TimezoneSelect />
-          </Box>
+        <Box sx={{ width: ["100%", 500], overflow: "hidden" }}>
+          <SpaceXLogo />
         </Box>
+        <LabelSpan>has scheduled the</LabelSpan>
+        <EmphSpan>{data.name}</EmphSpan>
+        <LabelSpan>mission for</LabelSpan>
+        <EmphSpan>{localDate}</EmphSpan>
+        <LabelSpan>at</LabelSpan>
+        <EmphSpan>{localTime}</EmphSpan>
+        <TimezoneSelect />
       </Box>
-    </>
+    </Layout>
   );
 }
 
