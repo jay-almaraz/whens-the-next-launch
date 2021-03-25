@@ -11,6 +11,7 @@
     "@mdx-js/loader": "^1.6.22",
     "@next/mdx": "^10.0.9",
     "@rebass/preset": "^4.0.5",
+    "@types/luxon": "^1.26.2",
     "@types/theme-ui": "^0.3.7",
     "gray-matter": "^4.0.2",
     "luxon": "^1.26.0",
