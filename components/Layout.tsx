@@ -1,8 +1,9 @@
 import { Box } from "@theme-ui/components";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 
-export const SITE_TITLE = "When's the next launch?";
+export const SITE_TITLE = "When's the next SpaceX launch?";
 
 const HtmlHead = () => (
   <Head>
@@ -42,7 +43,6 @@ const MenuZone = () => (
       alignContent: "flex-start",
       justifyContent: "space-between",
       width: ["100%", 500],
-      // paddingRight: [0, 5],
       marginBottom: [3, 5],
     }}
   >
@@ -126,6 +126,8 @@ const Layout = ({ children }) => {
           flex: "1 1 auto",
           justifyContent: "center",
           maxWidth: 960,
+          marginRight: [0, "128px"],
+          zIndex: 1,
         }}
       >
         <Box
@@ -139,13 +141,34 @@ const Layout = ({ children }) => {
             paddingLeft: [M_LEFT_PADDING, D_LEFT_PADDING],
             paddingBottom: 4,
             backgroundColor: "#000",
-            boxShadow: `${BLACK_SHADOW}, ${WHITE_SHADOW}`,
+            boxShadow: [0, `${BLACK_SHADOW}, ${WHITE_SHADOW}`],
           }}
         >
           <MenuZone />
 
           {children}
         </Box>
+      </Box>
+
+      <Box
+        sx={{
+          display: ["none", "block"],
+          top: 0,
+          left: 0,
+          position: "fixed",
+          height: "100vh",
+          width: "100vw",
+          overflow: "hidden",
+          zIndex: -1,
+        }}
+      >
+        <Image
+          src="/images/spacex-falcon-night.jpg"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="top"
+          quality={100}
+        />
       </Box>
     </>
   );

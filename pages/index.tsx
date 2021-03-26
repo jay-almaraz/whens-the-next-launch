@@ -7,34 +7,6 @@ import { DateTime, LocalZone } from "luxon";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-export const SITE_TITLE = "When's the next launch?";
-
-const HtmlHead = () => (
-  <Head>
-    <title>{SITE_TITLE}</title>
-    <meta
-      name="description"
-      content="Learn how to build a personal website using Next.js"
-    />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" href="/favicon.ico" />
-
-    <meta
-      property="og:image"
-      content={`https://og-image.vercel.app/${encodeURI(
-        SITE_TITLE
-      )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-    />
-    <meta name="og:title" content={SITE_TITLE} />
-    <meta name="twitter:card" content="summary_large_image" />
-  </Head>
-);
-
 interface HomeProps {
   data: Launch;
 }
@@ -174,8 +146,6 @@ export default function Home(props: HomeProps) {
 
   return (
     <Layout>
-      <HtmlHead />
-
       <Box
         as="p"
         sx={{

@@ -22,7 +22,7 @@ const theme = {
   },
   colors: {
     text: "#fff",
-    background: "#222",
+    background: "#000",
     primary: "#0cf",
     secondary: "#90c",
     success: COLOR.success,
@@ -43,6 +43,10 @@ const theme = {
       color: "#fff",
       backgroundColor: "#000",
       boxShadow: "4px 4px 0 0 #fff",
+      ":hover": {
+        textDecoration: "underline",
+        cursor: "pointer",
+      },
     },
   },
   // buttons: {
@@ -124,8 +128,8 @@ const theme = {
         color: "inherit",
         textDecoration: "none",
         ":hover": {
-          color: "#0004C4",
           textDecoration: "underline",
+          cursor: "pointer",
         },
       },
     },
