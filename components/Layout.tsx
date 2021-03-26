@@ -1,7 +1,8 @@
-import { Box, Heading } from "@theme-ui/components";
+import { Box, BoxProps, Heading } from "@theme-ui/components";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export const SITE_TITLE = "When's the next SpaceX launch?";
 
@@ -31,6 +32,93 @@ const HtmlHead = () => (
   </Head>
 );
 
+const HomeLink = (props: BoxProps) => (
+  <Link href="/">
+    <Box
+      as="a"
+      {...props}
+      sx={{
+        fontSize: 12,
+        backgroundColor: "#fff",
+        color: "#000",
+        paddingTop: 1,
+        paddingBottom: 1,
+        paddingRight: 4,
+        marginLeft: [-M_LEFT_PADDING, "-76px"],
+      }}
+    >{`whensthenextlaunch.com`}</Box>
+  </Link>
+);
+
+const MobileMenuPanel = () => {
+  const [open, setOpen] = useState(false);
+
+  function handleClose() {
+    setOpen(false);
+  }
+  return (
+    <>
+      <Box
+        onClick={() => setOpen(true)}
+        sx={{
+          backgroundColor: "#0004C4",
+          padding: 2,
+          paddingLeft: 4,
+          textAlign: "right",
+          fontSize: 12,
+          fontWeight: "bold",
+        }}
+      >
+        {"MENU <"}
+      </Box>
+
+      {open ? (
+        <Box
+          sx={{
+            display: open ? "block" : "none",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            backgroundColor: "#0004C4",
+          }}
+        >
+          <Box padding={3}>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box>
+                <HomeLink onClick={handleClose} />
+
+                <Heading as="h1" sx={{ color: "#fff", marginTop: 1 }}>
+                  MENU
+                </Heading>
+              </Box>
+              <Box onClick={handleClose}>{"CLOSE x"}</Box>
+            </Box>
+
+            <Box sx={{ display: "flex", marginTop: 4 }}>
+              <Box sx={{ display: "grid", rowGap: 3 }}>
+                <Link href={`/`}>
+                  <Box as="a" onClick={handleClose}>
+                    {"> home"}
+                  </Box>
+                </Link>
+                <Link href={`/about`}>
+                  <Box as="a" onClick={handleClose}>
+                    {"> about"}
+                  </Box>
+                </Link>
+              </Box>
+            </Box>
+
+            <DisclaimerStatement />
+          </Box>
+        </Box>
+      ) : null}
+    </>
+  );
+};
+
 const M_LEFT_PADDING = 3;
 const D_LEFT_PADDING = 5;
 
@@ -46,20 +134,7 @@ const MenuZone = () => (
       marginBottom: [3, 5],
     }}
   >
-    <Link href="/">
-      <Box
-        as="a"
-        sx={{
-          fontSize: 12,
-          backgroundColor: "#fff",
-          color: "#000",
-          paddingTop: 1,
-          paddingBottom: 1,
-          paddingRight: 4,
-          marginLeft: [-M_LEFT_PADDING, "-76px"],
-        }}
-      >{`whensthenextlaunch.com`}</Box>
-    </Link>
+    <HomeLink />
 
     {/* Desktop nav links */}
     <Box
@@ -84,18 +159,7 @@ const MenuZone = () => (
         paddingBottom: 3,
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "#0004C4",
-          padding: 2,
-          paddingLeft: 4,
-          textAlign: "right",
-          fontSize: 12,
-          fontWeight: "bold",
-        }}
-      >
-        {"MENU <"}
-      </Box>
+      <MobileMenuPanel />
     </Box>
   </Box>
 );
