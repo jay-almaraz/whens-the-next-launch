@@ -54,9 +54,13 @@ export default function About() {
           GitHub repository if you have any feedback, or wanna help out.
         </p>
 
-        <Box sx={{ marginTop: 3 }}>
+        <Box
+          sx={{
+            marginTop: 3,
+          }}
+        >
           <Link href="/">
-            <a>← back</a>
+            <a>← BACK</a>
           </Link>
         </Box>
       </Box>
