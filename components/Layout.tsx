@@ -1,4 +1,4 @@
-import { Box } from "@theme-ui/components";
+import { Box, Heading } from "@theme-ui/components";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +31,7 @@ const HtmlHead = () => (
   </Head>
 );
 
-const M_LEFT_PADDING = 4;
+const M_LEFT_PADDING = 3;
 const D_LEFT_PADDING = 5;
 
 const MenuZone = () => (
@@ -72,7 +72,7 @@ const MenuZone = () => (
       }}
     >
       <Link href={`/about`}>
-        <Box as="a">{"about/legal <"}</Box>
+        <Box as="a">{"about <"}</Box>
       </Link>
     </Box>
 
@@ -96,6 +96,36 @@ const MenuZone = () => (
       >
         {"MENU <"}
       </Box>
+    </Box>
+  </Box>
+);
+
+const DisclaimerStatement = () => (
+  <Box
+    as="footer"
+    sx={{
+      marginTop: 4,
+      maxWidth: 480,
+      backgroundColor: "#000",
+      fontSize: "9px",
+    }}
+  >
+    <Heading
+      as="h2"
+      sx={{
+        margin: 0,
+        padding: 0,
+        fontSize: "9px",
+      }}
+    >
+      Disclaimer
+    </Heading>
+    <Box as="p">
+      We are not affiliated, associated, authorized, endorsed by, or in any way
+      officially connected with Space Exploration Technologies Corp (SpaceX), or
+      any of its subsidiaries or its affiliates. The names SpaceX as well as
+      related names, marks, emblems and images are registered trademarks of
+      their respective owners.
     </Box>
   </Box>
 );
@@ -147,6 +177,8 @@ const Layout = ({ children }) => {
           <MenuZone />
 
           {children}
+
+          <DisclaimerStatement />
         </Box>
       </Box>
 

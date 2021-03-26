@@ -45,7 +45,6 @@ const theme = {
       boxShadow: "4px 4px 0 0 #fff",
       ":hover": {
         textDecoration: "underline",
-        cursor: "pointer",
       },
     },
   },
@@ -130,6 +129,13 @@ const theme = {
         ":hover": {
           textDecoration: "underline",
           cursor: "pointer",
+        },
+      },
+      "a.inverted": {
+        color: "#0cf",
+        ":hover": {
+          textDecoration: "underline",
+          color: "#0cf",
         },
       },
     },

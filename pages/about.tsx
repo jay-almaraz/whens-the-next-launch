@@ -1,5 +1,12 @@
 import Layout from "@components/Layout";
 import { Box, Heading } from "@theme-ui/components";
+import Link from "next/link";
+
+const Emoji = ({ children }) => (
+  <Box as="span" sx={{ color: "#a0a0a0" }}>
+    {children}
+  </Box>
+);
 
 export default function About() {
   return (
@@ -12,19 +19,45 @@ export default function About() {
       >
         <Heading as="h1">About</Heading>
 
-        <Box as="p">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra
-          aliquet eget sit amet tellus cras adipiscing. Ipsum dolor sit amet
-          consectetur adipiscing elit pellentesque habitant. Tristique nulla
-          aliquet enim tortor at. Pharetra convallis posuere morbi leo urna.
-          Gravida dictum fusce ut placerat orci nulla pellentesque dignissim.
-          Nec dui nunc mattis enim ut. Adipiscing diam donec adipiscing
-          tristique risus nec feugiat in. Augue lacus viverra vitae congue eu
-          consequat ac felis. Orci nulla pellentesque dignissim enim sit amet
-          venenatis. Vestibulum morbi blandit cursus risus at ultrices mi
-          tempus. Massa massa ultricies mi quis hendrerit. Egestas pretium
-          aenean pharetra magna.
+        <p>
+          When's the next launch? <Emoji>:shrug:</Emoji> Hopefully this provides
+          the simplest, and most extensible answer.
+        </p>
+
+        <Heading as="h2">Libraries</Heading>
+        <p>
+          We use the wonderful{" "}
+          <span>
+            <a
+              className="inverted"
+              href="https://github.com/r-spacex/SpaceX-API"
+              target="_blank"
+              rel="noopener"
+            >
+              r&#8209;spacex/SpaceX&#8209;API
+            </a>
+          </span>{" "}
+          open source REST API for SpaceX to retrieve data.
+        </p>
+
+        <Heading as="h2">Contributing</Heading>
+        <p>
+          We are open source! Check out the{" "}
+          <a
+            className="inverted"
+            href="https://github.com/jay-almaraz/whens-the-next-launch"
+            target="_blank"
+            rel="noopener"
+          >
+            whens&#8209;the&#8209;next&#8209;launch
+          </a>{" "}
+          GitHub repository if you have any feedback, or wanna help out.
+        </p>
+
+        <Box sx={{ marginTop: 3 }}>
+          <Link href="/">
+            <a>← back</a>
+          </Link>
         </Box>
       </Box>
     </Layout>

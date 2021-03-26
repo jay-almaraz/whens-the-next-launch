@@ -1,17 +1,16 @@
 import Layout from "@components/Layout";
 import SpaceXLogo from "@components/SpaceXLogo";
-import { getNextLaunch, Launch } from "@lib/launches";
+import { getNextLaunch, Launch, LaunchDatePrecision } from "@lib/launches";
 import { Box, Label, Select } from "@theme-ui/components";
 import { IANA_TIMEZONES } from "@utils/timezones";
 import { DateTime, LocalZone } from "luxon";
-import Head from "next/head";
 import { useEffect, useState } from "react";
 
 interface HomeProps {
   data: Launch;
 }
 
-const LabelSpan = ({ children }) => {
+const LabelSpan = ({ children, ...rest }) => {
   return (
     <Box
       as="span"
@@ -21,6 +20,7 @@ const LabelSpan = ({ children }) => {
         margin: 0,
         padding: 0,
         marginTop: 2,
+        ...rest.sx,
       }}
     >
       {children}
@@ -127,7 +127,80 @@ const TimezoneSelect = (props: TimezoneSelectProps) => {
   );
 };
 
-const LOCAL_FORMAT = Object.assign(DateTime.DATE_FULL, { weekday: "long" });
+function getQuarterFromMonth(month: number): number {
+  if (month < 4) return 1;
+  if (month < 7) return 2;
+  if (month < 10) return 3;
+  return 4;
+}
+
+const MONTH_PRECISION_FORMAT = {
+  ...DateTime.DATE_FULL,
+  day: undefined,
+  weekday: undefined,
+};
+
+const DAY_PRECISION_FORMAT = Object.assign(DateTime.DATE_FULL, {
+  weekday: "long",
+});
+
+function getDateTextAtPrecision(
+  dateTimeUTC: DateTime,
+  datePrecision: LaunchDatePrecision
+) {
+  if (datePrecision === "year") {
+    return `~ ${dateTimeUTC.toFormat("yyyy")}`;
+  }
+  if (datePrecision === "half") {
+    const isFirstHalf = dateTimeUTC.month <= 6;
+    const qBlockText = isFirstHalf ? "[Q1|Q2]" : "[Q3|Q4]";
+    return `~ ${qBlockText} ${dateTimeUTC.toFormat("yyyy")}`;
+  }
+  if (datePrecision === "quarter") {
+    const quarter = getQuarterFromMonth(dateTimeUTC.month);
+    const qBlockText = `Q${quarter}`;
+    return `~ ${qBlockText} ${dateTimeUTC.toFormat("yyyy")}`;
+  }
+  if (datePrecision === "month") {
+    return `~ ${dateTimeUTC.toLocaleString(MONTH_PRECISION_FORMAT)}`;
+  }
+  if (datePrecision === "day") {
+    return `~ ${dateTimeUTC.toLocaleString(DAY_PRECISION_FORMAT)}`;
+  }
+  return dateTimeUTC.toLocaleString(DAY_PRECISION_FORMAT);
+}
+
+const EmphDate = (props: {
+  dateTimeUTC: DateTime;
+  datePrecision: LaunchDatePrecision;
+  timeZone: string;
+}) => {
+  const { dateTimeUTC, datePrecision, timeZone } = props;
+
+  const dateTimeLocal = dateTimeUTC.setZone(timeZone);
+
+  return (
+    <EmphSpan>
+      {getDateTextAtPrecision(
+        datePrecision === "hour" ? dateTimeLocal : dateTimeUTC,
+        datePrecision
+      )}
+    </EmphSpan>
+  );
+};
+
+const SubjectToChangeWarning = ({ symbol }) => (
+  <LabelSpan
+    sx={{
+      maxWidth: 148,
+      textTransform: "uppercase",
+      color: "#FFC700",
+      fontWeight: "bold",
+    }}
+  >
+    {symbol} This information may be subject to change
+  </LabelSpan>
+);
 
 export default function Home(props: HomeProps) {
   const {
@@ -137,8 +210,7 @@ export default function Home(props: HomeProps) {
   const localZone = new LocalZone();
   const [timeZone, setTimeZone] = useState<string>(localZone.name);
   const dateTimeUTC = DateTime.fromISO(date_utc, { zone: "utc" });
-  const dateTimeLocal = dateTimeUTC.setZone(timeZone);
-  const localDate = dateTimeLocal.toLocaleString(LOCAL_FORMAT);
+  const showTimezoneSelect = date_precision === "hour";
 
   function handleTimezoneChange(tz: string) {
     setTimeZone(tz);
@@ -159,15 +231,43 @@ export default function Home(props: HomeProps) {
         <LabelSpan>has scheduled the</LabelSpan>
         <EmphSpan>{name}</EmphSpan>
         <LabelSpan>mission for</LabelSpan>
-        <EmphSpan>{localDate}</EmphSpan>
-        <LabelSpan>at</LabelSpan>
-        <EmphClock dateTime={dateTimeLocal} />
+        <EmphDate
+          dateTimeUTC={dateTimeUTC}
+          datePrecision={date_precision}
+          timeZone={timeZone}
+        />
+        {showTimezoneSelect ? (
+          <>
+            <LabelSpan>at</LabelSpan>
+            <EmphClock dateTime={dateTimeUTC.setZone(timeZone)} />
+          </>
+        ) : null}
       </Box>
-      <TimezoneSelect
-        localZone={localZone.name}
-        timeZone={timeZone}
-        handleTimezoneChange={handleTimezoneChange}
-      />
+
+      {showTimezoneSelect ? (
+        <TimezoneSelect
+          localZone={localZone.name}
+          timeZone={timeZone}
+          handleTimezoneChange={handleTimezoneChange}
+        />
+      ) : (
+        <LabelSpan sx={{ maxWidth: 196 }}>
+          A more accurate date and time will be released closer to the launch
+        </LabelSpan>
+      )}
+
+      <Box marginTop={4}>
+        <SubjectToChangeWarning symbol="!" />
+        {date_precision === "day" ? (
+          <SubjectToChangeWarning symbol="$" />
+        ) : null}
+        {date_precision === "hour" ? (
+          <>
+            <SubjectToChangeWarning symbol="$" />
+            <SubjectToChangeWarning symbol="\" />
+          </>
+        ) : null}
+      </Box>
     </Layout>
   );
 }
