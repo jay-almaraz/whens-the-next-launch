@@ -276,7 +276,7 @@ export default function Home(props: HomeProps) {
         </Box>
       )}
 
-      <Box marginTop={4}>
+      <Box as="p" marginTop={4}>
         <SubjectToChangeWarning symbol="!" />
         {date_precision === "day" ? (
           <SubjectToChangeWarning symbol="$" />

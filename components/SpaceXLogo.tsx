@@ -6,8 +6,8 @@ const SpaceXLogo = () => (
   <Image
     aria-describedby="spaceXLogoAriaDescription"
     alt="SpaceX "
-    width="400px"
-    height="50px"
+    width="600px"
+    height="75px"
     src="/images/spacex-logo-1.svg"
   />
 );
