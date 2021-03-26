@@ -20,8 +20,8 @@ export default function About() {
         <Heading as="h1">About</Heading>
 
         <p>
-          When's the next launch? <Emoji>:shrug:</Emoji> Hopefully this provides
-          the simplest, and most extensible answer.
+          When's the next launch? <Emoji>:shrug:</Emoji> Hopefully we provide
+          the simplest answer.
         </p>
 
         <Heading as="h2">Libraries</Heading>

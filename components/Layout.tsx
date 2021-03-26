@@ -61,7 +61,7 @@ const MobileMenuPanel = () => {
       <Box
         onClick={() => setOpen(true)}
         sx={{
-          backgroundColor: "#0004C4",
+          // backgroundColor: "#0004C4",
           padding: 2,
           paddingLeft: 4,
           textAlign: "right",
@@ -174,22 +174,23 @@ const DisclaimerStatement = () => (
       fontSize: "9px",
     }}
   >
-    <Heading
-      as="h2"
-      sx={{
-        margin: 0,
-        padding: 0,
-        fontSize: "9px",
-      }}
-    >
-      Disclaimer
-    </Heading>
     <Box as="p">
-      We are not affiliated, associated, authorized, endorsed by, or in any way
-      officially connected with Space Exploration Technologies Corp (SpaceX), or
-      any of its subsidiaries or its affiliates. The names SpaceX as well as
-      related names, marks, emblems and images are registered trademarks of
-      their respective owners.
+      <Heading
+        as="span"
+        sx={{
+          margin: 0,
+          padding: 0,
+          fontSize: "9px",
+        }}
+      >
+        Disclaimer
+        <br />
+      </Heading>
+      whensthenextlaunch.com are not affiliated, associated, authorized,
+      endorsed by, or in any way officially connected with Space Exploration
+      Technologies Corp (SpaceX), or any of its subsidiaries or its affiliates.
+      The names SpaceX as well as related names, marks, emblems and images are
+      registered trademarks of their respective owners.
     </Box>
   </Box>
 );
@@ -239,9 +240,7 @@ const Layout = ({ children }) => {
           }}
         >
           <MenuZone />
-
           {children}
-
           <DisclaimerStatement />
         </Box>
       </Box>

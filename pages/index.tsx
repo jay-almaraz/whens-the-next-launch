@@ -1,7 +1,7 @@
 import Layout from "@components/Layout";
 import SpaceXLogo from "@components/SpaceXLogo";
 import { getNextLaunch, Launch, LaunchDatePrecision } from "@lib/launches";
-import { Box, Label, Select } from "@theme-ui/components";
+import { Box, Heading, Label, Select } from "@theme-ui/components";
 import { IANA_TIMEZONES } from "@utils/timezones";
 import { DateTime, LocalZone } from "luxon";
 import { useEffect, useState } from "react";
@@ -13,10 +13,11 @@ interface HomeProps {
 const LabelSpan = ({ children, ...rest }) => {
   return (
     <Box
+      role="text"
       as="span"
       sx={{
         //
-        fontSize: 13,
+        fontSize: 16,
         margin: 0,
         padding: 0,
         marginTop: 2,
@@ -32,10 +33,11 @@ const LabelSpan = ({ children, ...rest }) => {
 const EmphSpan = ({ children }) => {
   return (
     <Box
+      role="text"
       as="span"
       sx={{
         //
-        fontSize: 36,
+        fontSize: 39,
         fontWeight: "bold",
         margin: 0,
         padding: 0,
@@ -70,6 +72,7 @@ const EmphClock = (props: EmphClockProps) => {
 
   return (
     <Box
+      role="text"
       as="span"
       sx={{
         //
@@ -218,6 +221,9 @@ export default function Home(props: HomeProps) {
 
   return (
     <Layout>
+      <Heading as="h1" sx={{ padding: 0, margin: 0, fontSize: "0px" }}>
+        When's the next launch?
+      </Heading>
       <Box
         as="p"
         sx={{
@@ -225,12 +231,24 @@ export default function Home(props: HomeProps) {
           flexDirection: "column",
         }}
       >
-        <Box as="span" sx={{ width: ["100%", 500], overflow: "hidden" }}>
+        <Box
+          aria-hidden
+          as="span"
+          sx={{ width: ["100%", 500], overflow: "hidden" }}
+        >
           <SpaceXLogo />
         </Box>
-        <LabelSpan>has scheduled the</LabelSpan>
-        <EmphSpan>{name}</EmphSpan>
-        <LabelSpan>mission for</LabelSpan>
+        <Box
+          sx={{ fontSize: "0px", height: 0 }}
+          as="span"
+          role="text"
+          id="spaceXLogoAriaDescription"
+        >
+          SpaceX{" "}
+        </Box>
+        <LabelSpan>has scheduled the </LabelSpan>
+        <EmphSpan>{name} </EmphSpan>
+        <LabelSpan>mission for </LabelSpan>
         <EmphDate
           dateTimeUTC={dateTimeUTC}
           datePrecision={date_precision}
@@ -251,9 +269,11 @@ export default function Home(props: HomeProps) {
           handleTimezoneChange={handleTimezoneChange}
         />
       ) : (
-        <LabelSpan sx={{ maxWidth: 196 }}>
-          A more accurate date and time will be released closer to the launch
-        </LabelSpan>
+        <Box as="p" sx={{ maxWidth: 196 }}>
+          <LabelSpan>
+            A more accurate date and time will be released closer to the launch
+          </LabelSpan>
+        </Box>
       )}
 
       <Box marginTop={4}>
