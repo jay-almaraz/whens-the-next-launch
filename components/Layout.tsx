@@ -84,16 +84,14 @@ const HomeLink = (props: BoxProps) => (
   </Link>
 );
 
-const MobileMenuPanel = () => {
-  const [open, setOpen] = useState(false);
-
+const MobileMenuPanel = ({ menuOpen, setMenuOpen }) => {
   function handleClose() {
-    setOpen(false);
+    setMenuOpen(false);
   }
   return (
     <>
       <Box
-        onClick={() => setOpen(true)}
+        onClick={() => setMenuOpen(true)}
         sx={{
           // backgroundColor: "#0004C4",
           padding: 2,
@@ -106,10 +104,10 @@ const MobileMenuPanel = () => {
         {"MENU <"}
       </Box>
 
-      {open ? (
+      {menuOpen ? (
         <Box
           sx={{
-            display: open ? "block" : "none",
+            display: menuOpen ? "block" : "none",
             position: "fixed",
             top: 0,
             left: 0,
@@ -156,7 +154,7 @@ const MobileMenuPanel = () => {
 const M_LEFT_PADDING = 3;
 const D_LEFT_PADDING = 5;
 
-const MenuZone = () => (
+const MenuZone = ({ menuOpen, setMenuOpen }) => (
   <Box
     sx={{
       display: "flex",
@@ -193,7 +191,7 @@ const MenuZone = () => (
         paddingBottom: 3,
       }}
     >
-      <MobileMenuPanel />
+      <MobileMenuPanel menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
     </Box>
   </Box>
 );
@@ -259,6 +257,8 @@ interface Props {
 }
 
 const Layout = ({ children, meta }: Props) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
       <LayoutHead title={meta?.title} description={meta?.description} />
@@ -289,8 +289,8 @@ const Layout = ({ children, meta }: Props) => {
             // boxShadow: [0, `${BLACK_SHADOW}, ${WHITE_SHADOW}`],
           }}
         >
-          <MenuZone />
-          {children}
+          <MenuZone menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+          <Box sx={{ display: menuOpen ? "none" : "block" }}>{children}</Box>
           <DisclaimerStatement />
         </Box>
       </Box>
