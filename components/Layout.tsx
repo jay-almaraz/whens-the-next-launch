@@ -30,19 +30,39 @@ const LayoutHead = ({ title, description }: LayoutHeadProps) => (
     />
 
     {/* Open Graph Images */}
-    <meta property="og:image" content="/images/ogimage-lg.png" />
+    <meta
+      property="image"
+      content="https://www.whensthenextlaunch.com/images/ogimage-lg.png"
+    />
+    <meta
+      property="og:image"
+      content="https://www.whensthenextlaunch.com/images/ogimage-lg.png"
+    />
+    <meta
+      property="og:image"
+      content="https://www.whensthenextlaunch.com/images/ogimage-lg.png"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image" content="/images/ogimage-m.png" />
+    <meta
+      property="og:image"
+      content="https://www.whensthenextlaunch.com/images/ogimage-m.png"
+    />
     <meta property="og:image:width" content="901" />
     <meta property="og:image:height" content="474" />
-    <meta property="og:image" content="/images/ogimage-s.png" />
+    <meta
+      property="og:image"
+      content="https://www.whensthenextlaunch.com/images/ogimage-s.png"
+    />
     <meta property="og:image:width" content="601" />
     <meta property="og:image:height" content="316" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    {/* <meta name="twitter:site" content="@jayalmaraz" /> */}
     <meta name="twitter:creator" content="@jayalmaraz" />
+    <meta
+      name="twitter:image"
+      content="https://www.whensthenextlaunch.com/images/ogimage-lg.png"
+    />
   </Head>
 );
 
