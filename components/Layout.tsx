@@ -17,19 +17,32 @@ const LayoutHead = ({ title, description }: LayoutHeadProps) => (
     <meta
       name="description"
       content={
-        description ??
-        "The simplest and most up to date information on the next SpaceX launch"
+        description ?? "The simplest information on the next SpaceX launch"
       }
     />
 
+    {/* Open Graph Meta */}
+    <meta property="og:title" content="When's the next SpaceX launch?" />
+    <meta property="og:url" content="https://www.whensthenextlaunch.com/" />
     <meta
-      property="og:image"
-      content={`https://og-image.vercel.app/${encodeURI(
-        SITE_TITLE
-      )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+      property="og:description"
+      content="The simplest information on the next SpaceX launch"
     />
-    <meta name="og:title" content={SITE_TITLE} />
+
+    {/* Open Graph Images */}
+    <meta property="og:image" content="/images/ogimage-lg.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="/images/ogimage-m.png" />
+    <meta property="og:image:width" content="901" />
+    <meta property="og:image:height" content="474" />
+    <meta property="og:image" content="/images/ogimage-s.png" />
+    <meta property="og:image:width" content="601" />
+    <meta property="og:image:height" content="316" />
+
     <meta name="twitter:card" content="summary_large_image" />
+    {/* <meta name="twitter:site" content="@jayalmaraz" /> */}
+    <meta name="twitter:creator" content="@jayalmaraz" />
   </Head>
 );
 
