@@ -14,13 +14,6 @@ const HtmlHead = () => (
       content="Learn how to build a personal website using Next.js"
     />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" href="/favicon.ico" />
-
     <meta
       property="og:image"
       content={`https://og-image.vercel.app/${encodeURI(
@@ -216,6 +209,8 @@ const Layout = ({ children }) => {
       <HtmlHead />
 
       <Box
+        as="main"
+        role="main"
         sx={{
           display: "flex",
           flex: "1 1 auto",
@@ -226,7 +221,7 @@ const Layout = ({ children }) => {
         }}
       >
         <Box
-          as="article"
+          as="section"
           sx={{
             position: "relative",
             display: "flex",
@@ -258,6 +253,7 @@ const Layout = ({ children }) => {
         }}
       >
         <Image
+          alt="A Falcon 9 rocket launches from a nighttime Cape Canaveral, from SpaceX's Starlink-19 (v1.0) mission in February, 2021"
           src="/images/spacex-falcon-night.jpg"
           layout="fill"
           objectFit="cover"

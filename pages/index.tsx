@@ -13,7 +13,6 @@ interface HomeProps {
 const LabelSpan = ({ children, ...rest }) => {
   return (
     <Box
-      role="text"
       as="span"
       sx={{
         //
@@ -33,7 +32,6 @@ const LabelSpan = ({ children, ...rest }) => {
 const EmphSpan = ({ children }) => {
   return (
     <Box
-      role="text"
       as="span"
       sx={{
         //
@@ -72,7 +70,6 @@ const EmphClock = (props: EmphClockProps) => {
 
   return (
     <Box
-      role="text"
       as="span"
       sx={{
         //
@@ -241,7 +238,6 @@ export default function Home(props: HomeProps) {
         <Box
           sx={{ fontSize: "0px", height: 0 }}
           as="span"
-          role="text"
           id="spaceXLogoAriaDescription"
         >
           SpaceX{" "}
