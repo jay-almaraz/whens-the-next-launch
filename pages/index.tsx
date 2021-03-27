@@ -202,6 +202,12 @@ const SubjectToChangeWarning = ({ symbol }) => (
   </LabelSpan>
 );
 
+interface TextContent {
+  company: string;
+  date: string;
+  time?: string;
+}
+
 export default function Home(props: HomeProps) {
   const {
     data: { name, date_utc, details, date_precision },
@@ -210,18 +216,35 @@ export default function Home(props: HomeProps) {
   const localZone = new LocalZone();
   const [timeZone, setTimeZone] = useState<string>(localZone.name);
   const dateTimeUTC = DateTime.fromISO(date_utc, { zone: "utc" });
+  const dateTimeLocal = dateTimeUTC.setZone(timeZone);
   const showTimezoneSelect = date_precision === "hour";
 
   function handleTimezoneChange(tz: string) {
     setTimeZone(tz);
   }
 
+  const textContent: TextContent = {
+    company: "SpaceX",
+    date: getDateTextAtPrecision(
+      date_precision === "hour" ? dateTimeLocal : dateTimeUTC,
+      date_precision
+    ),
+    time:
+      date_precision === "hour" ? dateTimeLocal.toFormat("hh:mm a") : undefined,
+  };
+  const fullText = `${
+    textContent.company
+  } has scheduled the ${name} mission for ${textContent.date} ${
+    textContent.time ? `at ${textContent.time} your local time` : ""
+  } (THIS INFORMATION MAY BE SUBJECT TO CHANGE)`;
+
   return (
-    <Layout>
+    <Layout meta={{ description: fullText }}>
       <Heading as="h1" sx={{ padding: 0, margin: 0, fontSize: "0px" }}>
         When's the next launch?
       </Heading>
       <Box
+        aria-hidden
         as="p"
         sx={{
           display: "flex",
@@ -245,15 +268,11 @@ export default function Home(props: HomeProps) {
         <LabelSpan>has scheduled the </LabelSpan>
         <EmphSpan>{name} </EmphSpan>
         <LabelSpan>mission for </LabelSpan>
-        <EmphDate
-          dateTimeUTC={dateTimeUTC}
-          datePrecision={date_precision}
-          timeZone={timeZone}
-        />
+        <EmphSpan>{textContent.date}</EmphSpan>
         {showTimezoneSelect ? (
           <>
             <LabelSpan>at</LabelSpan>
-            <EmphClock dateTime={dateTimeUTC.setZone(timeZone)} />
+            <EmphClock dateTime={dateTimeLocal} />
           </>
         ) : null}
       </Box>

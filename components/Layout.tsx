@@ -2,16 +2,24 @@ import { Box, BoxProps, Heading } from "@theme-ui/components";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 export const SITE_TITLE = "When's the next SpaceX launch?";
 
-const HtmlHead = () => (
+interface LayoutHeadProps {
+  title?: string;
+  description?: string;
+}
+
+const LayoutHead = ({ title, description }: LayoutHeadProps) => (
   <Head>
-    <title>{SITE_TITLE}</title>
+    <title>{title ?? SITE_TITLE}</title>
     <meta
       name="description"
-      content="Learn how to build a personal website using Next.js"
+      content={
+        description ??
+        "The simplest and most up to date information on the next SpaceX launch"
+      }
     />
 
     <meta
@@ -203,10 +211,20 @@ const WHITE_SHADOW = `${
   BLACK_SHADOW_Y + WHITE_SHADOW_WIDTH + BLACK_SHADOW_SHRINK
 }px 0 -${BLACK_SHADOW_SHRINK}px #fff`;
 
-const Layout = ({ children }) => {
+interface Meta {
+  title?: string;
+  description?: string;
+}
+
+interface Props {
+  children: ReactNode;
+  meta?: Meta;
+}
+
+const Layout = ({ children, meta }: Props) => {
   return (
     <>
-      <HtmlHead />
+      <LayoutHead title={meta?.title} description={meta?.description} />
 
       <Box
         as="main"
@@ -221,7 +239,7 @@ const Layout = ({ children }) => {
         }}
       >
         <Box
-          as="section"
+          as="article"
           sx={{
             position: "relative",
             display: "flex",
@@ -230,8 +248,8 @@ const Layout = ({ children }) => {
             width: ["100vw", 500],
             paddingLeft: [M_LEFT_PADDING, D_LEFT_PADDING],
             paddingBottom: 4,
-            backgroundColor: "#000",
-            boxShadow: [0, `${BLACK_SHADOW}, ${WHITE_SHADOW}`],
+            // backgroundColor: "#000",
+            // boxShadow: [0, `${BLACK_SHADOW}, ${WHITE_SHADOW}`],
           }}
         >
           <MenuZone />
