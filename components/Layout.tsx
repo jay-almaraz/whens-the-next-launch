@@ -205,6 +205,10 @@ const DisclaimerStatement = () => (
       Technologies Corp (SpaceX), or any of its subsidiaries or its affiliates.
       The names SpaceX as well as related names, marks, emblems and images are
       registered trademarks of their respective owners.
+      <br />
+      The information presented on whensthenextlauch.com comes with no
+      guarantees or warranties with respect to accuracy. All information is
+      subject to change.
     </Box>
   </Box>
 );
