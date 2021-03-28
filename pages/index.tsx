@@ -234,7 +234,7 @@ export default function Home(props: HomeProps) {
   };
   const fullText = `${
     textContent.company
-  } has scheduled the ${name} mission for ${textContent.date} ${
+  } is targeting the ${name} mission for ${textContent.date} ${
     textContent.time ? `at ${textContent.time} your local time` : ""
   } (THIS INFORMATION MAY BE SUBJECT TO CHANGE)`;
 
@@ -265,7 +265,7 @@ export default function Home(props: HomeProps) {
         >
           SpaceX{" "}
         </Box>
-        <LabelSpan>has scheduled the </LabelSpan>
+        <LabelSpan>is targeting the </LabelSpan>
         <EmphSpan>{name} </EmphSpan>
         <LabelSpan>mission for </LabelSpan>
         <EmphSpan>{textContent.date}</EmphSpan>
