@@ -4,7 +4,7 @@ Let's try and provide the simplest possible answer to that question!
 
 > More coming soon
 
-<!-- i wonder how i'll make this more automated after launches? oh well, for now it's 2021-05-01 -->
+<!-- i wonder how i'll make this more automated after launches? oh well, for now it's 2021-05-19 -->
 
 🚀⏰👈
 
