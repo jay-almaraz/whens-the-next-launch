@@ -307,7 +307,7 @@ export default function Home(props: HomeProps) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async (ctx) => {
   const data = await getNextLaunch();
   return {
     props: {
